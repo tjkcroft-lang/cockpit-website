@@ -1,4 +1,4 @@
-<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101010"><meta name="description" content="COCKPIT is an Australian men’s underwear brand preparing its first drop. Balls deep in comfort. Join the Members Club for first dibs and launch updates."><title>Men's Underwear Australia | COCKPIT — Balls Deep in Comfort</title><link rel="canonical" href="https://cockpitau.com/">
+<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101010"><meta name="description" content="COCKPIT is an Australian men’s underwear brand preparing its first drop. Balls deep in comfort. Join the Members Club for first dibs and launch updates."><title>Men's Underwear Australia | COCKPIT — Balls Deep in Comfort</title><link rel="canonical" href="https://cockpitau.com/"><link rel="preconnect" href="https://tjkcroft-lang.github.io" crossorigin>
 <link rel="icon" type="image/png" href="https://tjkcroft-lang.github.io/Cockpit-Preview/cockpit-rooster-transparent.png">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta property="og:type" content="website"><meta property="og:site_name" content="COCKPIT"><meta property="og:locale" content="en_AU">
@@ -126,6 +126,12 @@ header.nav{position:sticky;top:0;z-index:1500;background:#101010;isolation:isola
  .nav .currency{max-width:105px}
 }
 @media(max-width:390px){.nav .brand{max-width:35vw}.nav .rooster-button{width:64px}}
+
+/* Keep overlays above sticky navigation without changing their appearance. */
+#search-overlay{z-index:3000}
+#info-modal{z-index:3100}
+#club-popup{z-index:3200}
+:target{scroll-margin-top:120px}
 
 /* Useful pre-launch information and organic search pathways; existing brand sections remain unchanged. */
 .seo-landing{background:#151515;color:#f2eddf;padding:clamp(52px,6vw,90px) clamp(22px,6vw,90px);display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(25px,5vw,85px);align-items:start}
