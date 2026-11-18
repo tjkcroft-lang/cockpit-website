@@ -157,4 +157,27 @@ header.nav{position:sticky;top:0;z-index:1500;background:#101010;isolation:isola
 
 // Mobile navigation: preserve existing actions and close after navigation.
 (()=>{const toggle=document.querySelector('.mobile-menu-toggle'),panel=document.getElementById('mobile-navigation');if(!toggle||!panel)return;function closeMenu(){panel.classList.remove('mobile-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation menu')}toggle.addEventListener('click',()=>{const open=!panel.classList.contains('mobile-open');panel.classList.toggle('mobile-open',open);toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')});panel.addEventListener('click',e=>{if(e.target.closest('a,button.utility-button'))closeMenu()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});document.addEventListener('click',e=>{if(!e.target.closest('.nav'))closeMenu()});window.addEventListener('resize',()=>{if(window.innerWidth>800)closeMenu()})})();
+</script>
+<script>
+/* COCKPIT first-party interaction event layer. No analytics vendor is loaded or data transmitted. */
+(function(){
+const emit=(event,data={})=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event,...data})};
+const sourceFor=(el)=>el.closest('.search-launch-copy')?'search':el.closest('#info-modal')?'bag_or_account':el.closest('#mobile-navigation')?'mobile_menu':el.closest('.hero')?'hero':el.closest('#club')?'members_club_section':'other';
+document.addEventListener('click',function(e){
+const join=e.target.closest('[data-open-club], #search-club-link, #modal-cta');
+if(join)emit('club_signup_cta_click',{placement:sourceFor(join)});
+if(e.target.closest('#open-search'))emit('site_search_open');
+if(e.target.closest('[data-modal="account"]'))emit('account_dialog_open');
+if(e.target.closest('[data-modal="bag"]'))emit('bag_dialog_open');
+},{capture:true});
+const form=document.getElementById('club-signup-form');
+if(!form)return;
+form.addEventListener('focusin',()=>emit('club_form_start'),{once:true});
+form.addEventListener('submit',()=>emit('club_form_submit_attempt'),{capture:true});
+const status=document.getElementById('club-popup-status');
+if(status&&typeof MutationObserver!=='undefined'){
+const ob=new MutationObserver(()=>{if(status.textContent.includes("YOU'RE IN."))emit('club_form_transport_acknowledged');else if(status.textContent.includes('could not confirm'))emit('club_form_transport_error')});
+ob.observe(status,{childList:true,characterData:true,subtree:true});
+}
+})();
 </script></body></html>
