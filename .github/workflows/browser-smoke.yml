@@ -1,0 +1,42 @@
+name: COCKPIT desktop and iPhone browser smoke test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    name: Test mobile menu, registration popup and sticky nav
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install headless Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install chromium --with-deps
+      - name: Start local website server
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/cockpit-http.log 2>&1 &
+          echo $! > /tmp/cockpit-http.pid
+      - name: Test COCKPIT desktop and mobile
+        run: |
+          mkdir -p screenshots
+          node tests/browser-smoke.mjs
+      - name: Save screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cockpit-browser-screenshots
+          path: screenshots/
+          if-no-files-found: ignore
