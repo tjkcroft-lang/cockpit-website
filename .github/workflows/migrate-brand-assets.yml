@@ -1,0 +1,68 @@
+name: One-time migration of original brand assets
+on:
+  push:
+    paths:
+      - .github/workflows/migrate-brand-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-assets:
+    name: Copy exact original files to a review branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify original COCKPIT files
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            "cockpit-wordmark.png:c2016fd889964c91d26f0879a42172f68a579fb4"
+            "cockpit-rooster-transparent.png:68ef0f1c82de8bd34859b6e50a5d9f214964d4e2"
+            "cockpit-search-artwork.PNG:1b0eb001b75bc7496f49f81b5ebbe50ba207a888"
+            "cockpit-rooster.mp3:34c1258df1f2f57ce77de9cc3bd11c8787f1216f"
+          )
+          for entry in "${files[@]}"; do
+            file="${entry%%:*}"
+            expected="${entry##*:}"
+            curl --fail --location --retry 3 --retry-delay 2 \
+              "https://raw.githubusercontent.com/tjkcroft-lang/Cockpit-Preview/main/${file}" \
+              --output "${file}"
+            actual="$(git hash-object "${file}")"
+            if [ "${actual}" != "${expected}" ]; then
+              echo "::error::Original file checksum mismatch: ${file}"
+              exit 1
+            fi
+          done
+      - name: Use first-party production URLs without changing layout or copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          names=["cockpit-wordmark.png","cockpit-rooster-transparent.png","cockpit-search-artwork.PNG","cockpit-rooster.mp3"]
+          modified=0
+          for file in ["index.html","members-club.html","mens-underwear-guide.html","privacy.html"]:
+              p=Path(file)
+              before=p.read_text(encoding="utf-8")
+              after=before
+              for name in names:
+                  after=after.replace("https://tjkcroft-lang.github.io/Cockpit-Preview/"+name, "/"+name)
+              if after!=before:
+                  p.write_text(after,encoding="utf-8")
+                  modified+=1
+          assert modified>=2, "Expected to migrate several COCKPIT HTML pages"
+          print("Updated production asset references in",modified,"pages")
+          PY
+      - name: Push review branch (not the live main branch)
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch="assets/self-hosted-${{ github.run_id }}"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git checkout -b "${branch}"
+          git add cockpit-wordmark.png cockpit-rooster-transparent.png cockpit-search-artwork.PNG cockpit-rooster.mp3 index.html members-club.html mens-underwear-guide.html privacy.html
+          git commit -m "Self-host original COCKPIT artwork and rooster sound"
+          git push origin "HEAD:refs/heads/${branch}"
+          echo "Review branch: ${branch}"
