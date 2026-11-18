@@ -88,6 +88,13 @@ padding:12px;
  body .nav #mobile-navigation .utility-button{width:44px!important;height:44px!important}
 }
 
+/* Sticky COCKPIT navigation on phone and desktop. Announcement scrolls normally. */
+header.nav{position:sticky;top:0;z-index:1500;background:#101010;isolation:isolate}
+@media screen and (max-width:800px){
+ body header.nav{position:sticky;top:0;z-index:1500}
+ body header.nav #mobile-navigation{top:88px!important;max-height:calc(100dvh - 88px)!important}
+}
+
 /* Mobile-only navigation: original rooster anchored to the true viewport centre. */
 .mobile-menu-toggle,.mobile-join-link{display:none}
 @media(max-width:800px){
