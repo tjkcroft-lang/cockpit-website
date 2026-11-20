@@ -150,7 +150,92 @@ header.nav{position:sticky;top:0;z-index:1500;background:#101010;isolation:isola
 @media screen and (max-width:800px){
  body header.nav #mobile-navigation{top:var(--mobile-nav-bottom,119px)!important;max-height:calc(100dvh - var(--mobile-nav-bottom,119px))!important}
 }
-</style></head><body><div class="announcement"><button class="announce-arrow announce-prev" type="button" aria-label="Previous announcement">‹</button><div class="announce-slide active"><a href="#club">THE FRIST DROP IS COMING — GET ON THE LIST</a></div><div class="announce-slide"><span>FREE SHIPPING ON ORDERS OVER $100</span></div><button class="announce-arrow announce-next" type="button" aria-label="Next announcement">›</button></div><header class="nav"><a class="brand" href="#top" aria-label="COCKPIT home"><img src="/cockpit-wordmark.png" alt="COCKPIT"></a><button class="rooster-button" type="button" aria-label="Play rooster crow" title="Tap to hear the rooster"><img src="/cockpit-rooster-transparent.png" alt="" aria-hidden="true"></button><button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span><span></span></button><div class="nav-right" id="mobile-navigation"><nav class="navlinks"><a href="#drop">FIRST DROP</a><a href="members-club.html">MEMBERS CLUB</a><a class="mobile-join-link" href="#club" data-open-club>JOIN THE CLUB</a></nav><div class="utility-nav"><button class="utility-button" type="button" aria-label="Search" title="Search" id="open-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg></button><button class="utility-button" type="button" aria-label="Account" title="Account" data-modal="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-5 3-8 8-8s8 3 8 8"/></svg></button><button class="utility-button" type="button" aria-label="Shopping bag" title="Shopping bag" data-modal="bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v14H4z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></button><select class="currency" aria-label="Display currency"><option value="AUD">AUD $</option><option value="USD">USD $</option><option value="NZD">NZD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></div></div></header><main id="top"><div class="hero"><div class="hero-copy"><div class="eyebrow">MEN'S UNDERWEAR. NO HALF MEASURES.</div><h1>BALLS<br>DEEP IN<br><span>COMFORT.</span></h1><p>Underwear with attitude. Meet COCKPIT. Our first drop is on the way, and the club gets first dibs.</p><div class="buttons"><a class="btn" href="#club" data-open-club>JOIN THE CLUB</a><a class="btn outline" href="#drop">FIRST DROP</a></div></div><div class="hero-art"><img src="rooster.jpg" alt="COCKPIT rooster mascot"></div></div><div class="ticker"><span>COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳ COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳ COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳&nbsp;</span></div><section id="different" class="split"><div class="product-image reveal"><img src="underwear.jpg" alt="Black COCKPIT boxer brief concept showing branded waistband"></div><div class="reveal"><div class="eyebrow">01 / BUILT DIFFERENT</div><h2 class="section-title">GOOD<br>UNDERWEAR.<br><em>BAD</em> ATTITUDE.</h2><p class="copy">Designed around everyday comfort, with a distinctive COCKPIT waistband and rooster detail. This is a preview of our debut concept — final product specifications will be confirmed before launch.</p><div class="facts"><div class="fact">Signature waistband</div><div class="fact">Rooster detail</div><div class="fact">Comfort-led design</div></div></div></section><section id="club" class="club split"><div class="reveal"><div class="eyebrow">02 / THE INNER CIRCLE</div><h2 class="section-title">JOIN<br>THE <em>CLUB.</em></h2><p class="copy">Get first word on new drops, priority launch updates and members-only offers when they're announced. No membership fee. Just good underwear and a head start.</p></div><div class="signup-card reveal"><h3>GET YOUR NAME ON THE LIST.</h3><p>COCKPIT Members Club is opening before our first drop.</p><a class="btn" href="#club" data-open-club>REGISTER INTEREST ↗</a><p class="note">Enter your details to receive launch updates. Registration delivery requires email service activation.</p></div></section><section id="drop" class="preorder split"><div class="reveal"><div class="eyebrow">03 / THE DEBUT DROP</div><h2 class="section-title">FIRST<br>IN. <em>BEST</em><br>DRESSED.</h2><p class="copy">The first COCKPIT drop is coming. Register your interest to hear when pre-orders open. No payment or reservation is taken at this stage.</p></div><div class="signup-card reveal"><h3>DON'T MISS THE DROP.</h3><p>Want first access to the debut release? Let us know.</p><a class="btn" href="#club" data-open-club>REGISTER PRE-ORDER INTEREST ↗</a><p class="note">No payment is taken. You will be notified when orders open.</p></div></section>
+
+/* Product-first homepage refresh — scoped to the two combined landing sections. */
+.launch-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(26px,4vw,70px);align-items:center;min-height:0;padding:clamp(35px,5vw,76px) clamp(20px,5.5vw,90px);position:relative;background:radial-gradient(ellipse at 100% 40%,#262022 0,transparent 55%),#101010;overflow:hidden}
+.launch-hero .hero-copy{padding:0;min-width:0;z-index:auto}
+.launch-hero h1{font-size:clamp(58px,7.45vw,128px);line-height:.88;letter-spacing:-.075em;margin:20px 0 22px}
+.launch-hero p{max-width:510px;margin:0;color:#c9c7c2}
+.launch-hero .buttons{margin-top:24px}
+.launch-hero .btn{min-height:49px;display:inline-flex;justify-content:center;align-items:center;text-align:center}
+.launch-edition{margin-top:27px;display:flex;align-items:center;gap:9px;font-size:10px;font-weight:900;letter-spacing:.14em;color:#b7b3ac}
+.launch-edition span{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+.launch-product{min-width:0;border:1px solid #494343;background:#161616;padding:clamp(12px,1.8vw,24px);position:relative;scroll-margin-top:130px}
+.launch-product-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:0 0 12px;font-size:10px;font-weight:900;letter-spacing:.13em;color:var(--cream)}
+.launch-product-top span:last-child{color:var(--red)}
+.launch-product-image{margin:0;padding:0;background:#e7e7e7;position:relative;overflow:hidden}
+.launch-product-image img{display:block;width:100%;height:clamp(200px,24vw,360px);object-fit:contain}
+.launch-product-image figcaption{background:#e7e7e7;color:#3e3e3e;font-size:9px;font-weight:800;letter-spacing:.08em;padding:8px 10px;text-align:center}
+.launch-product-copy{padding:18px 2px 2px}
+.launch-product .section-title{margin:0;font-size:clamp(25px,3.1vw,53px);line-height:.96;letter-spacing:-.045em}
+.launch-product .section-title br{display:none}
+.launch-product .facts{margin-top:18px;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.launch-product .fact{font-size:10px;letter-spacing:.035em;line-height:1.35}
+.launch-club{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:clamp(25px,5.5vw,90px);padding:clamp(45px,5.5vw,82px) clamp(20px,5.5vw,90px);position:relative;background:var(--red);scroll-margin-top:130px}
+.launch-anchor{position:absolute;top:0;left:0;scroll-margin-top:130px}
+.launch-club-kicker{margin-top:15px;font-size:clamp(14px,1.6vw,22px);font-weight:900;letter-spacing:.12em}
+.launch-club .section-title{font-size:clamp(47px,6vw,105px);line-height:.9;margin:14px 0 22px;letter-spacing:-.06em}
+.launch-club .copy{font-size:clamp(16px,1.4vw,19px);margin:0 0 12px;color:#171010;line-height:1.55}
+.launch-club .launch-club-short{font-weight:800;margin-bottom:0}
+.launch-signup{border:1px solid #303030;padding:clamp(22px,3.3vw,46px);box-shadow:7px 7px 0 #10101033}
+.launch-card-top{color:var(--red);font-size:11px;font-weight:900;letter-spacing:.12em;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #464646;padding-bottom:13px;margin-bottom:23px}
+.launch-card-top span{color:#aaa}
+.launch-signup h3{font-size:clamp(25px,3vw,42px);line-height:1.05}
+.launch-signup .btn{background:var(--red);border-color:var(--red);color:#101010;min-height:50px;display:flex;align-items:center;justify-content:center}
+.launch-signup .note{margin-bottom:0}
+.launch-hero a:focus-visible,.launch-club a:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
+@media(max-width:800px){
+ .launch-hero{grid-template-columns:1fr;gap:27px;padding:35px 22px 28px}
+ .launch-hero h1{font-size:clamp(46px,13.3vw,98px)}
+ .launch-hero .buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .launch-hero .btn{padding:13px 8px;font-size:11px}
+ .launch-edition{margin-top:20px}
+ .launch-product{padding:13px}
+ .launch-product-image img{height:clamp(205px,49vw,340px)}
+ .launch-product .section-title{font-size:clamp(26px,6vw,45px)}
+ .launch-product .facts{margin-top:14px}
+ .launch-club{grid-template-columns:1fr;gap:24px;padding:40px 22px}
+ .launch-club .section-title{font-size:clamp(45px,11vw,78px)}
+ .launch-signup{padding:23px}
+}
+@media(max-width:360px){.launch-product .fact{font-size:9px}.launch-hero .eyebrow{font-size:10px}.launch-product-top{font-size:9px}}
+
+</style></head><body><div class="announcement"><button class="announce-arrow announce-prev" type="button" aria-label="Previous announcement">‹</button><div class="announce-slide active"><a href="#club">THE FRIST DROP IS COMING — GET ON THE LIST</a></div><div class="announce-slide"><span>FREE SHIPPING ON ORDERS OVER $100</span></div><button class="announce-arrow announce-next" type="button" aria-label="Next announcement">›</button></div><header class="nav"><a class="brand" href="#top" aria-label="COCKPIT home"><img src="/cockpit-wordmark.png" alt="COCKPIT"></a><button class="rooster-button" type="button" aria-label="Play rooster crow" title="Tap to hear the rooster"><img src="/cockpit-rooster-transparent.png" alt="" aria-hidden="true"></button><button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation"><span></span><span></span><span></span></button><div class="nav-right" id="mobile-navigation"><nav class="navlinks"><a href="#drop">FIRST DROP</a><a href="members-club.html">MEMBERS CLUB</a><a class="mobile-join-link" href="#club" data-open-club>JOIN THE CLUB</a></nav><div class="utility-nav"><button class="utility-button" type="button" aria-label="Search" title="Search" id="open-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg></button><button class="utility-button" type="button" aria-label="Account" title="Account" data-modal="account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-5 3-8 8-8s8 3 8 8"/></svg></button><button class="utility-button" type="button" aria-label="Shopping bag" title="Shopping bag" data-modal="bag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v14H4z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></button><select class="currency" aria-label="Display currency"><option value="AUD">AUD $</option><option value="USD">USD $</option><option value="NZD">NZD $</option><option value="GBP">GBP £</option><option value="EUR">EUR €</option></select></div></div></header><main id="top">
+<div class="hero launch-hero">
+  <div class="hero-copy">
+    <div class="eyebrow">MEN'S UNDERWEAR. NO HALF MEASURES.</div>
+    <h1>BALLS<br>DEEP IN<br><span>COMFORT.</span></h1>
+    <p>Underwear with attitude. Designed around everyday comfort, with a signature COCKPIT waistband. Our first drop is coming.</p>
+    <div class="buttons"><a class="btn" href="#club" data-open-club>JOIN THE CLUB</a><a class="btn outline" href="#drop">FIRST DROP</a></div>
+    <div class="launch-edition"><span></span> THE DEBUT DROP / COMING SOON</div>
+  </div>
+  <div class="launch-product" id="different">
+    <div class="launch-product-top"><span>01 / BUILT DIFFERENT</span><span>FIRST LOOK</span></div>
+    <figure class="product-image launch-product-image"><img src="underwear.jpg" alt="Black COCKPIT boxer brief concept showing branded waistband" fetchpriority="high"><figcaption>DEBUT PRODUCT CONCEPT / FINAL SPECIFICATIONS TBC</figcaption></figure>
+    <div class="launch-product-copy">
+      <h2 class="section-title">GOOD<br>UNDERWEAR.<br><em>BAD</em> ATTITUDE.</h2>
+      <div class="facts"><div class="fact">Signature waistband</div><div class="fact">Rooster detail</div><div class="fact">Comfort-led design</div></div>
+    </div>
+  </div>
+</div>
+<div class="ticker"><span>COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳ COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳ COCKPIT ✳ BUILT DIFFERENT ✳ BALLS DEEP IN COMFORT ✳&nbsp;</span></div>
+<section id="club" class="club launch-club" aria-labelledby="launch-club-title">
+  <div id="drop" class="launch-anchor" aria-hidden="true"></div>
+  <div class="launch-club-copy">
+    <div class="eyebrow">02 / THE INNER CIRCLE</div>
+    <div class="launch-club-kicker">JOIN THE CLUB.</div>
+    <h2 class="section-title" id="launch-club-title">FIRST IN.<br><em>BEST</em> DRESSED.</h2>
+    <p class="copy">The first COCKPIT drop is coming. Join the Members Club and get first word when pre-orders open, priority launch updates and members-only offers when announced.</p>
+    <p class="copy launch-club-short">No membership fee. Just good underwear and a head start.</p>
+  </div>
+  <div class="signup-card launch-signup">
+    <div class="launch-card-top">COCKPIT MEMBERS CLUB <span>01</span></div>
+    <h3>GET YOUR NAME ON THE LIST.</h3>
+    <p>Register once for Members Club updates and first-drop notifications.</p>
+    <a class="btn" href="#club" data-open-club>JOIN THE CLUB</a>
+    <p class="note">No payment or product reservation is taken. Registration delivery requires email service activation.</p>
+  </div>
+</section>
 <section class="seo-landing" id="about-cockpit-underwear" aria-labelledby="seo-undies-title">
 <div class="seo-landing-copy"><p class="seo-kicker">COCKPIT / AUSTRALIA</p><h2 id="seo-undies-title">MEN'S UNDERWEAR IN AUSTRALIA.</h2><p>COCKPIT is an Australian men's underwear brand getting ready for its first release. Our focus is comfort with attitude: a brand for people who don't think their everyday essentials should be boring.</p><p>If you're researching men's undies, underwear styles or premium men's underwear, take a look at our practical fit guide. We're not taking orders yet, so join the Members Club to hear when our first drop opens.</p><div class="seo-links"><a href="mens-underwear-guide.html">READ THE MEN'S UNDERWEAR GUIDE</a><a href="members-club.html">EXPLORE THE MEMBERS CLUB</a></div></div>
 <div class="seo-faq" aria-label="COCKPIT first drop questions"><h3>FIRST DROP QUESTIONS</h3>
