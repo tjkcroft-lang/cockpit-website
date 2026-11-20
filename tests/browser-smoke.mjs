@@ -24,6 +24,19 @@ async function checkViewport(name,width,height,isMobile) {
   await requiredImage(page,'.club-popup-art');
   assert.equal(await page.locator('#club-signup-form').count(),1,name+': missing signup form');
   await page.screenshot({path:'screenshots/'+name+'-home.png',fullPage:true});
+  await requiredImage(page,'.launch-product-image img');
+  assert.equal(await page.locator('.launch-hero img[src*="rooster"]').count(),0,name+': hero rooster still present');
+  assert.equal(await page.locator('main .signup-card').count(),1,name+': duplicate signup sections');
+  assert.equal(await page.locator('#club #drop').count(),1,name+': first-drop anchor not combined');
+  assert.equal(await page.locator('.launch-product h2').innerText(),'GOOD\nUNDERWEAR.\nBAD ATTITUDE.');
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),name+': horizontal overflow');
+  await page.locator('.launch-hero .btn.outline').click();
+  await page.waitForTimeout(800);
+  assert.equal(await page.evaluate(()=>location.hash),'#drop');
+  await page.locator('.launch-signup [data-open-club]').click();
+  await page.locator('#club-popup').waitFor({state:'visible'});
+  await page.locator('.club-popup-close').click();
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
   const nav=page.locator('header.nav');
   if(isMobile){
     const rooster=await page.locator('.nav .rooster-button').boundingBox();
